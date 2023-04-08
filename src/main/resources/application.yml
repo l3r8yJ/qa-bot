@@ -4,8 +4,6 @@ server:
 spring:
   application:
     name: qa-bot
-  liquibase:
-    contexts: local
   datasource:
     password: root
     username: postgres
