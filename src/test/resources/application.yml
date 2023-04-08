@@ -1,0 +1,14 @@
+server:
+  port: 8079
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+    url: jdbc:h2:mem:test_db
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
