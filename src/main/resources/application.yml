@@ -1,0 +1,21 @@
+server:
+  port: 8080
+---
+spring:
+  application:
+    name: qa-bot
+  liquibase:
+    contexts: local
+  datasource:
+    password: root
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
