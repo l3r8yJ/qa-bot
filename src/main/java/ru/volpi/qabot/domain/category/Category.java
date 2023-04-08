@@ -24,5 +24,5 @@ public class Category {
     private Long id;
 
     @Column(name = "category_name")
-    String name;
+    private String name;
 }
