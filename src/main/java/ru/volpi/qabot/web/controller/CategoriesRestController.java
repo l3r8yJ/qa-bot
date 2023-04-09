@@ -32,12 +32,20 @@ public class CategoriesRestController {
     
     @PutMapping
     public final ResponseEntity<?> createCategory(@RequestBody final CategoryDto registration) {
-        return this.handleRegistration(registration);
+        return this.handleCreateCategory(registration);
+    }
+
+    @PatchMapping("/{id}")
+    public final ResponseEntity<?> updateCategoryById(
+        @PathVariable final Long id,
+        @RequestBody final CategoryDto update
+    ) {
+        return this.handleUpdateCategoryById(id, update);
     }
 
     @DeleteMapping("/{id}")
     public final ResponseEntity<?> deleteCategoryById(@PathVariable final Long id) {
-        return this.handleCategoryRegistration(id);
+        return this.handleDeleteCategoryById(id);
     }
 
     private ResponseEntity<?> handleCategoryByName(final String name) {
@@ -52,7 +60,7 @@ public class CategoriesRestController {
         return result;
     }
 
-    private ResponseEntity<?> handleRegistration(final CategoryDto registration) {
+    private ResponseEntity<?> handleCreateCategory(final CategoryDto registration) {
         ResponseEntity<?> result;
         try {
             result = ResponseEntity
@@ -66,7 +74,18 @@ public class CategoriesRestController {
         return result;
     }
 
-    private ResponseEntity<?> handleCategoryRegistration(final Long id) {
+    private ResponseEntity<?> handleUpdateCategoryById(final Long id, final CategoryDto update) {
+        ResponseEntity<?> result;
+        try {
+            result = ResponseEntity.ok(this.service.update(id, update));
+        } catch (final CategoryException ex) {
+            result = ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .body(ex.getMessage());
+        }
+        return result;
+    }
+
+    private ResponseEntity<?> handleDeleteCategoryById(final Long id) {
         ResponseEntity<?> result;
         try {
             result = ResponseEntity.ok(this.service.deleteById(id));
