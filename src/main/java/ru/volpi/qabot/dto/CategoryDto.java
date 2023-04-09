@@ -5,12 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Value;
+import ru.volpi.qabot.dto.message.ValidationMessages;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
-
-import static ru.volpi.qabot.dto.message.ValidationMessages.CATEGORY_NAME_CANT_BE_EMPTY;
 
 @Data
 @Value
@@ -23,7 +22,7 @@ public class CategoryDto implements Serializable {
 
     Long id;
 
-    @NotNull(message = CATEGORY_NAME_CANT_BE_EMPTY)
+    @NotNull(message = ValidationMessages.CATEGORY_NAME_CANT_BE_EMPTY)
     String name;
 
     List<QuestionDto> questions;

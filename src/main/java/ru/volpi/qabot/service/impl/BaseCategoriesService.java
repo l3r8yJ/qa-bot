@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.volpi.qabot.domain.category.Category;
 import ru.volpi.qabot.dto.CategoryDto;
 import ru.volpi.qabot.exception.CategoryNotFoundException;
-import ru.volpi.qabot.exception.CategoryWithNameAlreadyExist;
+import ru.volpi.qabot.exception.CategoryWithNameAlreadyExistException;
 import ru.volpi.qabot.mapper.CategoryMapper;
 import ru.volpi.qabot.repository.CategoriesRepository;
 import ru.volpi.qabot.service.CategoriesService;
@@ -39,7 +39,7 @@ public class BaseCategoriesService implements CategoriesService {
     @Override
     public CategoryDto save(final CategoryDto dto) {
         if (this.categoriesRepository.existsByName(dto.getName())) {
-            throw new CategoryWithNameAlreadyExist(dto.getName());
+            throw new CategoryWithNameAlreadyExistException(dto.getName());
         }
         final Category category = this.categoryMapper.toEntity(dto);
         this.categoriesRepository.save(category);
