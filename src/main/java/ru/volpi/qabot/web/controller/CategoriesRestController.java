@@ -63,51 +63,18 @@ public class CategoriesRestController {
     }
 
     private ResponseEntity<?> handleCategoryByName(final String name) {
-        ResponseEntity<?> result;
-        try {
-            result = ResponseEntity.ok(this.service.findCategoryByName(name));
-        } catch (final CategoryNotFoundException ex) {
-            result = ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(ex.getMessage());
-        }
-        return result;
+        return ResponseEntity.ok(this.service.findCategoryByName(name));
     }
 
     private ResponseEntity<?> handleCreateCategory(final CategoryDto registration) {
-        ResponseEntity<?> result;
-        try {
-            result = ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.service.save(registration));
-        } catch (final CategoryException ex) {
-            result = ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(ex.getMessage());
-        }
-        return result;
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.service.save(registration));
     }
 
     private ResponseEntity<?> handleUpdateCategoryById(final Long id, final CategoryDto update) {
-        ResponseEntity<?> result;
-        try {
-            result = ResponseEntity.ok(this.service.update(id, update));
-        } catch (final CategoryException ex) {
-            result = ResponseEntity.status(HttpStatus.NO_CONTENT)
-                .body(ex.getMessage());
-        }
-        return result;
+        return ResponseEntity.ok(this.service.update(id, update));
     }
 
     private ResponseEntity<?> handleDeleteCategoryById(final Long id) {
-        ResponseEntity<?> result;
-        try {
-            result = ResponseEntity.ok(this.service.deleteById(id));
-        } catch (final CategoryException ex) {
-            result = ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(ex.getMessage());
-        }
-        return result;
+        return ResponseEntity.ok(this.service.deleteById(id));
     }
 }
