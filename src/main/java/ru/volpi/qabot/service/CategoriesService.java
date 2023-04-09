@@ -1,24 +1,11 @@
 package ru.volpi.qabot.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ru.volpi.qabot.dto.CategoryName;
-import ru.volpi.qabot.repository.CategoriesRepository;
+import ru.volpi.qabot.dto.CategoryDto;
 
-import java.util.List;
+import java.util.Optional;
 
-@RequiredArgsConstructor
-@Transactional(readOnly = true)
-@Service
-public class CategoriesService {
+public interface CategoriesService extends CrudService<CategoryDto, Long> {
 
-    private final CategoriesRepository repository;
+    CategoryDto findCategoryByName(String name);
 
-    public List<CategoryName> allCategories() {
-        return this.repository.findAll()
-            .stream()
-            .map(category -> new CategoryName(category.getName()))
-            .toList();
-    }
 }

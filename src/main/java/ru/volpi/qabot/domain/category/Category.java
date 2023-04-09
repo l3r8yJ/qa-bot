@@ -7,7 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.volpi.qabot.domain.question.Question;
 
-import java.util.Collection;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
-public class Category {
+public class Category implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1767598689053486337L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
