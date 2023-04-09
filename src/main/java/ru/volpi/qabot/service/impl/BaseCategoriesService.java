@@ -8,6 +8,7 @@ import ru.volpi.qabot.dto.CategoryDto;
 import ru.volpi.qabot.dto.CategoryName;
 import ru.volpi.qabot.dto.QuestionDto;
 import ru.volpi.qabot.exception.CategoryNotFoundException;
+import ru.volpi.qabot.mapper.CategoryMapper;
 import ru.volpi.qabot.repository.CategoriesRepository;
 import ru.volpi.qabot.service.CategoriesService;
 
@@ -21,42 +22,29 @@ public class BaseCategoriesService implements CategoriesService {
 
     private final CategoriesRepository repository;
 
+    private final CategoryMapper mapper;
+
     @Transactional
     @Override
     public CategoryDto findCategoryByName(final String name) {
         final Optional<Category> found = this.repository.findCategoryByName(name);
-        if (found.isPresent()) {
-            return CategoryDto.builder()
-                .id(found.get().getId())
-                .name(found.get().getName())
-                .questions(
-                    found.get().getQuestions().stream().map(
-                        question -> QuestionDto.builder()
-                            .text(question.getText())
-                            .answer(question.getAnswer())
-                            .category(new CategoryName(found.get().getName()))
-                            .build()
-                    ).toList()
-                )
-                .build();
+        if (found.isEmpty()) {
+            throw new CategoryNotFoundException(name);
         }
-        throw new CategoryNotFoundException(name);
+        return this.mapper.toDto(found.get());
     }
 
     @Transactional
     @Override
     public CategoryDto save(final CategoryDto dto) {
-        this.repository.save(
-            Category.builder()
-                .name(dto.getName())
-                .build()
-        );
+        this.repository.save(this.mapper.toEntity(dto));
         return dto;
     }
 
     @Transactional
     @Override
     public CategoryDto update(final Long id, final CategoryDto dto) {
+        // @TODO Refactor me
         this.repository.save(
             Category.builder()
                 .id(id)
@@ -77,16 +65,15 @@ public class BaseCategoriesService implements CategoriesService {
     @Override
     public Optional<CategoryDto> findById(final Long id) {
         return this.repository.findById(id)
-            .map(
-                category -> CategoryDto.builder().name(category.getName()).build()
-            );
+            .map(this.mapper::toDto);
     }
 
     @Transactional
     @Override
     public List<CategoryDto> findAll() {
-        return this.repository.findAll().stream().map(
-            category -> CategoryDto.builder().name(category.getName()).build()
-        ).toList();
+        return this.repository.findAll()
+            .stream()
+            .map(this.mapper::toDto)
+            .toList();
     }
 }
