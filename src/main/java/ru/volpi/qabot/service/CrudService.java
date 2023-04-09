@@ -12,7 +12,7 @@ public interface CrudService<K extends Serializable, X extends Serializable> {
 
     X deleteById(X id);
 
-    Optional<K> findById(X id);
+    K findById(X id);
 
     List<K> findAll();
 }

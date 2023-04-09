@@ -13,7 +13,6 @@ import ru.volpi.qabot.repository.CategoriesRepository;
 import ru.volpi.qabot.service.CategoriesService;
 
 import java.util.List;
-import java.util.Optional;
 
 import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_SAVED_IN_SERVICE;
 import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_UPDATED_IN_SERVICE;
@@ -24,26 +23,26 @@ import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_UPDATED
 @RequiredArgsConstructor
 public class BaseCategoriesService implements CategoriesService {
 
-    private final CategoriesRepository repository;
+    private final CategoriesRepository categoriesRepository;
 
-    private final CategoryMapper mapper;
+    private final CategoryMapper categoryMapper;
 
     @Transactional
     @Override
     public CategoryDto findCategoryByName(final String name) {
-        return this.repository.findCategoryByName(name)
-            .map(this.mapper::toDto)
+        return this.categoriesRepository.findCategoryByName(name)
+            .map(this.categoryMapper::toDto)
             .orElseThrow(() -> new CategoryNotFoundException(name));
     }
 
     @Transactional
     @Override
     public CategoryDto save(final CategoryDto dto) {
-        if (this.repository.existsByName(dto.getName())) {
+        if (this.categoriesRepository.existsByName(dto.getName())) {
             throw new CategoryWithNameAlreadyExist(dto.getName());
         }
-        final Category category = this.mapper.toEntity(dto);
-        this.repository.save(category);
+        final Category category = this.categoryMapper.toEntity(dto);
+        this.categoriesRepository.save(category);
         BaseCategoriesService.log.debug(CATEGORY_WAS_SAVED_IN_SERVICE, category);
         return dto;
     }
@@ -51,15 +50,15 @@ public class BaseCategoriesService implements CategoriesService {
     @Transactional
     @Override
     public CategoryDto update(final Long id, final CategoryDto dto) {
-        final CategoryDto updated = this.repository.findById(id).map(
+        final CategoryDto updated = this.categoriesRepository.findById(id).map(
             entity -> {
-                final Category category = this.mapper.toEntity(dto);
+                final Category category = this.categoryMapper.toEntity(dto);
                 category.setId(id);
                 return category;
             }
         )
-            .map(this.repository::saveAndFlush)
-            .map(this.mapper::toDto)
+            .map(this.categoriesRepository::saveAndFlush)
+            .map(this.categoryMapper::toDto)
             .orElseThrow(() -> new CategoryNotFoundException(id));
         BaseCategoriesService.log.debug(CATEGORY_WAS_UPDATED_IN_SERVICE, updated);
         return updated;
@@ -68,23 +67,24 @@ public class BaseCategoriesService implements CategoriesService {
     @Transactional
     @Override
     public Long deleteById(final Long id) {
-        this.repository.deleteById(id);
+        this.categoriesRepository.deleteById(id);
         return id;
     }
 
     @Transactional
     @Override
-    public Optional<CategoryDto> findById(final Long id) {
-        return this.repository.findById(id)
-            .map(this.mapper::toDto);
+    public CategoryDto findById(final Long id) {
+        return this.categoriesRepository.findById(id)
+            .map(this.categoryMapper::toDto)
+            .orElseThrow(() -> new CategoryNotFoundException(id));
     }
 
     @Transactional
     @Override
     public List<CategoryDto> findAll() {
-        return this.repository.findAll()
+        return this.categoriesRepository.findAll()
             .stream()
-            .map(this.mapper::toDto)
+            .map(this.categoryMapper::toDto)
             .toList();
     }
 }
