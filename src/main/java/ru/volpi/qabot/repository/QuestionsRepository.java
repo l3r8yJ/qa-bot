@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface QuestionsRepository extends JpaRepository<Question, Long> {
 
-    List<Question> getQuestionsByCategoryName(String name);
+    List<Question> findQuestionsByCategoryName(String name);
 
 }

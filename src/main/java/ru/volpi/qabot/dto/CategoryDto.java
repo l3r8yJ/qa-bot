@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Value;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,6 +15,9 @@ import java.util.List;
 @Builder
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class CategoryDto implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 6575828891374861627L;
 
     Long id;
 
