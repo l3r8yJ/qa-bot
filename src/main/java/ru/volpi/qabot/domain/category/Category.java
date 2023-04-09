@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import ru.volpi.qabot.domain.question.Question;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(schema = "categories_storage", name = "categories")
@@ -25,5 +26,6 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private Collection<Question> question;
+    private List<Question> questions;
+
 }

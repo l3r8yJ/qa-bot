@@ -19,12 +19,13 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(targetEntity = Question.class)
-    private Category category;
-
     @Column(name = "question_text")
     private String text;
 
     @Column(name = "question_answer")
     private String answer;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 }
