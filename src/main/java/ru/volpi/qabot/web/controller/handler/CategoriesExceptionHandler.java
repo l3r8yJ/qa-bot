@@ -21,14 +21,11 @@ public class CategoriesExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CategoryWithNameAlreadyExistException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ResponseEntity<?> handleCategoryNotFound(final CategoryWithNameAlreadyExistException exc) {
+    public ResponseEntity<?> handleCategoryWithNameAlreadyExist(final CategoryWithNameAlreadyExistException exc) {
         return CategoriesExceptionHandler.errorResponse(exc, HttpStatus.CONFLICT);
     }
 
-    private static ResponseEntity<String> errorResponse(
-        final CategoryException exc,
-        final HttpStatus status
-    ) {
+    private static ResponseEntity<String> errorResponse(final CategoryException exc, final HttpStatus status) {
         return ResponseEntity.status(status).body(exc.getMessage());
     }
 }
