@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.volpi.qabot.domain.category.Category;
 
-import java.util.Collection;
-
 @Entity
 @Table(schema = "questions_storage", name = "questions")
 @AllArgsConstructor
