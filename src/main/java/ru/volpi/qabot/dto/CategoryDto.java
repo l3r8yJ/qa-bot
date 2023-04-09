@@ -10,6 +10,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
+import static ru.volpi.qabot.dto.message.ValidationMessages.CATEGORY_NAME_CANT_BE_EMPTY;
+
 @Data
 @Value
 @Builder
@@ -21,7 +23,7 @@ public class CategoryDto implements Serializable {
 
     Long id;
 
-    @NotNull(message = "Название категории не может быть пустым")
+    @NotNull(message = CATEGORY_NAME_CANT_BE_EMPTY)
     String name;
 
     List<QuestionDto> questions;
