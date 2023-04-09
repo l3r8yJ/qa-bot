@@ -35,6 +35,11 @@ public class CategoriesRestController {
         return this.handleRegistration(registration);
     }
 
+    @DeleteMapping("/{id}")
+    public final ResponseEntity<?> deleteCategoryById(@PathVariable final Long id) {
+        return this.handleCategoryRegistration(id);
+    }
+
     private ResponseEntity<?> handleCategoryByName(final String name) {
         ResponseEntity<?> result;
         try {
@@ -53,6 +58,18 @@ public class CategoriesRestController {
             result = ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.service.save(registration));
+        } catch (final CategoryException ex) {
+            result = ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+        }
+        return result;
+    }
+
+    private ResponseEntity<?> handleCategoryRegistration(final Long id) {
+        ResponseEntity<?> result;
+        try {
+            result = ResponseEntity.ok(this.service.deleteById(id));
         } catch (final CategoryException ex) {
             result = ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
