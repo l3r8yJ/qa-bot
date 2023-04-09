@@ -15,6 +15,7 @@ import ru.volpi.qabot.service.CategoriesService;
 import java.util.List;
 import java.util.Optional;
 
+import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_SAVED_IN_SERVICE;
 import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_UPDATED_IN_SERVICE;
 
 @Slf4j
@@ -41,7 +42,9 @@ public class BaseCategoriesService implements CategoriesService {
         if (this.repository.existsByName(dto.getName())) {
             throw new CategoryWithNameAlreadyExist(dto.getName());
         }
-        this.repository.save(this.mapper.toEntity(dto));
+        final Category category = this.mapper.toEntity(dto);
+        this.repository.save(category);
+        BaseCategoriesService.log.debug(CATEGORY_WAS_SAVED_IN_SERVICE, category);
         return dto;
     }
 
