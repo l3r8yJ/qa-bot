@@ -14,6 +14,8 @@ import ru.volpi.qabot.service.CategoriesService;
 import java.util.List;
 import java.util.Optional;
 
+import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_UPDATED_IN_SERVICE;
+
 @Slf4j
 @Service
 @Transactional(readOnly = true)
@@ -23,7 +25,6 @@ public class BaseCategoriesService implements CategoriesService {
     private final CategoriesRepository repository;
 
     private final CategoryMapper mapper;
-    private static final String CATEGORY_WAS_UPDATED_IN_SERVICE = "Category was updated in service :{}";
 
     @Transactional
     @Override
@@ -55,7 +56,7 @@ public class BaseCategoriesService implements CategoriesService {
             .map(this.repository::saveAndFlush)
             .map(this.mapper::toDto)
             .orElseThrow(() -> new CategoryNotFoundException(id));
-        BaseCategoriesService.log.debug(BaseCategoriesService.CATEGORY_WAS_UPDATED_IN_SERVICE, updated);
+        BaseCategoriesService.log.debug(CATEGORY_WAS_UPDATED_IN_SERVICE, updated);
         return updated;
     }
 
