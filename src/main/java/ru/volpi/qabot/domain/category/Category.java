@@ -1,15 +1,13 @@
 package ru.volpi.qabot.domain.category;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.volpi.qabot.domain.question.Question;
+
+import java.util.Collection;
 
 @Entity
 @Table(schema = "categories_storage", name = "categories")
@@ -25,4 +23,7 @@ public class Category {
 
     @Column(name = "category_name")
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private Collection<Question> question;
 }
