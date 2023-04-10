@@ -1,4 +1,4 @@
-package ru.volpi.qabot.web.controller.handler;
+package ru.volpi.qabot.web.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

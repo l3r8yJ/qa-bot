@@ -1,4 +1,4 @@
-package ru.volpi.qabot.web.controller.handler;
+package ru.volpi.qabot.web.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
