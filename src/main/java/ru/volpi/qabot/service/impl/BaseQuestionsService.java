@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import ru.volpi.qabot.domain.question.Question;
 import ru.volpi.qabot.dto.QuestionDto;
-import ru.volpi.qabot.exception.QuestionNotFoundException;
+import ru.volpi.qabot.exception.question.QuestionNotFoundException;
 import ru.volpi.qabot.mapper.QuestionMapper;
 import ru.volpi.qabot.repository.QuestionsRepository;
 import ru.volpi.qabot.service.QuestionService;

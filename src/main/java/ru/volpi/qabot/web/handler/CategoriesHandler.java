@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.volpi.qabot.exception.CategoryException;
-import ru.volpi.qabot.exception.CategoryNotFoundException;
-import ru.volpi.qabot.exception.CategoryWithNameAlreadyExistException;
+import ru.volpi.qabot.exception.category.CategoryException;
+import ru.volpi.qabot.exception.category.CategoryNotFoundException;
+import ru.volpi.qabot.exception.category.CategoryWithNameAlreadyExistException;
 
 @ControllerAdvice
 public class CategoriesHandler extends ResponseEntityExceptionHandler {
