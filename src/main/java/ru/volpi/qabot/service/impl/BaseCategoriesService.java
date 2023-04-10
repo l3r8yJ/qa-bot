@@ -2,7 +2,6 @@ package ru.volpi.qabot.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.volpi.qabot.domain.category.Category;
 import ru.volpi.qabot.dto.CategoryDto;
@@ -11,6 +10,7 @@ import ru.volpi.qabot.exception.CategoryWithNameAlreadyExistException;
 import ru.volpi.qabot.mapper.CategoryMapper;
 import ru.volpi.qabot.repository.CategoriesRepository;
 import ru.volpi.qabot.service.CategoriesService;
+import ru.volpi.qabot.service.annotation.InternalService;
 
 import java.util.List;
 
@@ -18,8 +18,7 @@ import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_SAVED_I
 import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_UPDATED_IN_SERVICE;
 
 @Slf4j
-@Service
-@Transactional(readOnly = true)
+@InternalService
 @RequiredArgsConstructor
 public class BaseCategoriesService implements CategoriesService {
 
