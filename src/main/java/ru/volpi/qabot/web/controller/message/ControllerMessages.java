@@ -14,4 +14,10 @@ public class ControllerMessages {
     public static final String REGISTRATION_IN_CONTROLLER
         = "Requested registration in controller :{}";
 
+    public static final String UPDATE_IN_CONTROLLER
+        = "Requested update in controller :{} : :{}";
+
+    public static final String DELETE_IN_CONTROLLER
+        = "Requested delete in controller :{}";
+
 }

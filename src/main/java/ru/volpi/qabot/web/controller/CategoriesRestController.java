@@ -54,11 +54,15 @@ public class CategoriesRestController {
         @PathVariable final Long id,
         @RequestBody final CategoryDto update
     ) {
+        CategoriesRestController
+            .log.debug(ControllerMessages.UPDATE_IN_CONTROLLER, id, update);
         return this.handleUpdateCategoryById(id, update);
     }
 
     @DeleteMapping("/{id}")
     public final ResponseEntity<?> deleteCategoryById(@PathVariable final Long id) {
+        CategoriesRestController
+            .log.debug(ControllerMessages.DELETE_IN_CONTROLLER, id);
         return this.handleDeleteCategoryById(id);
     }
 
