@@ -11,18 +11,18 @@ import ru.volpi.qabot.exception.CategoryNotFoundException;
 import ru.volpi.qabot.exception.CategoryWithNameAlreadyExistException;
 
 @ControllerAdvice
-public class CategoriesExceptionHandler extends ResponseEntityExceptionHandler {
+public class CategoriesHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CategoryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<?> handleCategoryNotFound(final CategoryNotFoundException exc) {
-        return CategoriesExceptionHandler.errorResponse(exc, HttpStatus.NOT_FOUND);
+        return CategoriesHandler.errorResponse(exc, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(CategoryWithNameAlreadyExistException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<?> handleCategoryWithNameAlreadyExist(final CategoryWithNameAlreadyExistException exc) {
-        return CategoriesExceptionHandler.errorResponse(exc, HttpStatus.CONFLICT);
+        return CategoriesHandler.errorResponse(exc, HttpStatus.CONFLICT);
     }
 
     private static ResponseEntity<String> errorResponse(final CategoryException exc, final HttpStatus status) {
