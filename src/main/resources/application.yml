@@ -3,7 +3,7 @@ server:
 ---
 spring:
   application:
-    name: qa-bot
+    name: qa-service
   datasource:
     username: postgres
     password: root
@@ -17,3 +17,6 @@ spring:
     hibernate:
       ddl-auto: none
     open-in-view: false
+  mvc:
+    format:
+      date: iso

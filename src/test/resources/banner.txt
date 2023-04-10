@@ -11,3 +11,4 @@
 
 https://github.com/l3r8yJ/qa-bot
 Powered by Spring Boot ${spring-boot.version}
+Test configuration
