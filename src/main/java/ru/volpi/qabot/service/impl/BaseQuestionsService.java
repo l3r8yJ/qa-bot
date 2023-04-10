@@ -2,6 +2,7 @@ package ru.volpi.qabot.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import ru.volpi.qabot.domain.question.Question;
 import ru.volpi.qabot.dto.QuestionDto;
 import ru.volpi.qabot.exception.QuestionNotFoundException;
@@ -23,12 +24,14 @@ public class BaseQuestionsService implements QuestionService {
 
     private final QuestionMapper questionMapper;
 
+    @Transactional
     @Override
     public QuestionDto save(final QuestionDto dto) {
         this.questionsRepository.save(this.questionMapper.toEntity(dto));
         return dto;
     }
 
+    @Transactional
     @Override
     public QuestionDto update(final Long id, final QuestionDto dto) {
         final QuestionDto updated = this.questionsRepository.findById(id).map(
@@ -45,12 +48,14 @@ public class BaseQuestionsService implements QuestionService {
         return updated;
     }
 
+    @Transactional
     @Override
     public Long deleteById(final Long id) {
         this.questionsRepository.deleteById(id);
         return id;
     }
 
+    @Transactional
     @Override
     public QuestionDto findById(final Long id) {
         return this.questionsRepository.findById(id)
@@ -58,6 +63,7 @@ public class BaseQuestionsService implements QuestionService {
             .orElseThrow(() -> new QuestionNotFoundException(id));
     }
 
+    @Transactional
     @Override
     public List<QuestionDto> findAll() {
         return this.questionsRepository.findAll()
