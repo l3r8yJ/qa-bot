@@ -2,10 +2,12 @@ package ru.volpi.qabot.domain.question;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Hibernate;
 import ru.volpi.qabot.domain.category.Category;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(schema = "questions_storage", name = "questions")
@@ -14,7 +16,6 @@ import java.io.Serializable;
 @Builder
 @Setter
 @Getter
-@EqualsAndHashCode
 @ToString
 public class Question implements Serializable {
 
@@ -31,9 +32,25 @@ public class Question implements Serializable {
     @Column(name = "question_answer")
     private String answer;
 
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
+    @ToString.Exclude
     private Category category;
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        final Question question = (Question) o;
+        return this.id != null && Objects.equals(this.id, question.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
+    }
 }

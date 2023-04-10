@@ -2,20 +2,22 @@ package ru.volpi.qabot.domain.category;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Hibernate;
 import ru.volpi.qabot.domain.question.Question;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(schema = "categories_storage", name = "categories")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Setter
 @Getter
-@EqualsAndHashCode
+@Setter
 @ToString
 public class Category implements Serializable {
 
@@ -29,8 +31,28 @@ public class Category implements Serializable {
     @Column(name = "category_name")
     private String name;
 
-    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "category", cascade = {
+        CascadeType.MERGE,
+        CascadeType.REMOVE
+    })
     @ToString.Exclude
-    @OneToMany(mappedBy = "category")
-    private List<Question> questions;
+    @Builder.Default
+    private List<Question> questions = new ArrayList<>(0);
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        final Category category = (Category) o;
+        return id != null && Objects.equals(id, category.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
+    }
 }
