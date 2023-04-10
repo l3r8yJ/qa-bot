@@ -73,10 +73,12 @@ public class CategoriesRestController {
     }
 
     private ResponseEntity<?> handleUpdateCategoryById(final Long id, final CategoryDto update) {
-        return ResponseEntity.ok(this.service.update(id, update));
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+            .body(this.service.update(id, update));
     }
 
     private ResponseEntity<?> handleDeleteCategoryById(final Long id) {
-        return ResponseEntity.ok(this.service.deleteById(id));
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+            .body(this.service.deleteById(id));
     }
 }
