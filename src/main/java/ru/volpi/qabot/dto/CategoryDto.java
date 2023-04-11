@@ -2,19 +2,22 @@ package ru.volpi.qabot.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Value;
+import lombok.*;
 import ru.volpi.qabot.dto.message.ValidationMessages;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @Value
 @Builder
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class CategoryDto implements Serializable {
 
     @Serial

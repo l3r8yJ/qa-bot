@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Value;
+import lombok.*;
 import ru.volpi.qabot.dto.message.ValidationMessages;
 
 import java.io.Serial;
@@ -15,6 +13,10 @@ import java.io.Serializable;
 @Data
 @Value
 @Builder
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class QuestionDto implements Serializable {
 
