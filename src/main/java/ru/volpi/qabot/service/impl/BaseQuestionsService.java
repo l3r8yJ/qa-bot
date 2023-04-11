@@ -9,14 +9,14 @@ import ru.volpi.qabot.exception.question.QuestionNotFoundException;
 import ru.volpi.qabot.mapper.QuestionMapper;
 import ru.volpi.qabot.repository.QuestionsRepository;
 import ru.volpi.qabot.service.QuestionService;
-import ru.volpi.qabot.service.annotation.InternalService;
+import ru.volpi.qabot.service.annotation.TransactionalService;
 
 import java.util.List;
 
 import static ru.volpi.qabot.service.messages.DebugMessages.*;
 
 @Slf4j
-@InternalService
+@TransactionalService
 @RequiredArgsConstructor
 public class BaseQuestionsService implements QuestionService {
 

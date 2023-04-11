@@ -10,7 +10,7 @@ import ru.volpi.qabot.exception.category.CategoryWithNameAlreadyExistException;
 import ru.volpi.qabot.mapper.CategoryMapper;
 import ru.volpi.qabot.repository.CategoriesRepository;
 import ru.volpi.qabot.service.CategoriesService;
-import ru.volpi.qabot.service.annotation.InternalService;
+import ru.volpi.qabot.service.annotation.TransactionalService;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_SAVED_I
 import static ru.volpi.qabot.service.messages.DebugMessages.CATEGORY_WAS_UPDATED_IN_SERVICE;
 
 @Slf4j
-@InternalService
+@TransactionalService
 @RequiredArgsConstructor
 public class BaseCategoriesService implements CategoriesService {
 
