@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.5'
     id 'io.spring.dependency-management' version '1.1.0'
+    id 'jacoco'
 }
 
 group = 'ru.volpi'
@@ -39,6 +40,16 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql:1.17.6'
     testImplementation 'org.testcontainers:junit-jupiter:1.18.0'
     testImplementation 'org.projectlombok:lombok:1.18.22'
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+test {
+    finalizedBy jacocoTestReport
 }
 
 tasks.named('test') {
