@@ -14,8 +14,6 @@ import java.io.Serializable;
 @Value
 @Builder
 @AllArgsConstructor
-@Getter
-@Setter
 @ToString
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class QuestionDto implements Serializable {

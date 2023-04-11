@@ -1,9 +1,10 @@
-package ru.volpi.qabot.dto;
+package ru.volpi.qabot.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.volpi.qabot.dto.QuestionResponse;
 
 import java.io.Serial;
 import java.io.Serializable;

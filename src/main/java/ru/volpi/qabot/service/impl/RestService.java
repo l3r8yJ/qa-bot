@@ -3,7 +3,7 @@ package ru.volpi.qabot.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import ru.volpi.qabot.dto.CategoryResponse;
+import ru.volpi.qabot.dto.category.CategoryResponse;
 
 @Service
 @RequiredArgsConstructor

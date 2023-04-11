@@ -21,5 +21,15 @@ spring:
       ddl-auto: none
     open-in-view: false
   mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
     format:
       date: iso
+  devtools:
+    livereload:
+      enabled: true
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: file:src/main/resources/templates/
