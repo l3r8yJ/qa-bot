@@ -23,4 +23,4 @@ jobs:
           java-version: ${{ matrix.java }}
       - uses: docker-practice/actions-setup-docker@master
         timeout-minutes: 12
-      - run: gradlew clean build --no-daemon --console=plain --build-cache --configure-on-demand
+      - run: gradle clean build --no-daemon --console=plain --build-cache --configure-on-demand
