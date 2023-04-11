@@ -1,11 +1,9 @@
 package ru.volpi.qabot.dto.question;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import ru.volpi.qabot.dto.category.CategoryDto;
 import ru.volpi.qabot.dto.message.ValidationMessages;
 
 import java.io.Serial;

@@ -3,8 +3,8 @@ package ru.volpi.qabot.dto.category;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.volpi.qabot.dto.question.QuestionDto;
 import ru.volpi.qabot.dto.message.ValidationMessages;
+import ru.volpi.qabot.dto.question.QuestionDto;
 
 import java.io.Serial;
 import java.io.Serializable;
