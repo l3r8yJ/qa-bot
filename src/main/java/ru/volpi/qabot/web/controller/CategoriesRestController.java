@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.volpi.qabot.dto.CategoryDto;
+import ru.volpi.qabot.dto.category.CategoryDto;
 import ru.volpi.qabot.service.CategoriesService;
 import ru.volpi.qabot.web.controller.message.ControllerMessages;
 

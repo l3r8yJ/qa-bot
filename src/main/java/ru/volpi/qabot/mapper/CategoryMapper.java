@@ -3,7 +3,7 @@ package ru.volpi.qabot.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.volpi.qabot.domain.category.Category;
-import ru.volpi.qabot.dto.CategoryDto;
+import ru.volpi.qabot.dto.category.CategoryDto;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {

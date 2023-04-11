@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import ru.volpi.qabot.domain.category.Category;
-import ru.volpi.qabot.dto.CategoryDto;
+import ru.volpi.qabot.dto.category.CategoryDto;
 import ru.volpi.qabot.exception.category.CategoryNotFoundException;
 import ru.volpi.qabot.exception.category.CategoryWithNameAlreadyExistException;
 import ru.volpi.qabot.mapper.CategoryMapper;

@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import ru.volpi.qabot.domain.question.Question;
-import ru.volpi.qabot.dto.QuestionDto;
+import ru.volpi.qabot.dto.question.QuestionDto;
+import ru.volpi.qabot.dto.question.QuestionRegistration;
 import ru.volpi.qabot.exception.question.QuestionNotFoundException;
 import ru.volpi.qabot.mapper.QuestionMapper;
+import ru.volpi.qabot.repository.CategoriesRepository;
 import ru.volpi.qabot.repository.QuestionsRepository;
 import ru.volpi.qabot.service.QuestionService;
 import ru.volpi.qabot.service.annotation.TransactionalService;
@@ -22,6 +24,8 @@ public class BaseQuestionsService implements QuestionService {
 
     private final QuestionsRepository questionsRepository;
 
+    private final CategoriesRepository categoriesRepository;
+
     private final QuestionMapper questionMapper;
 
     @Transactional
@@ -29,6 +33,17 @@ public class BaseQuestionsService implements QuestionService {
     public QuestionDto save(final QuestionDto dto) {
         this.questionsRepository.save(this.questionMapper.toEntity(dto));
         return dto;
+    }
+
+    @Transactional
+    @Override
+    public void save(final QuestionRegistration registration) {
+        this.categoriesRepository.findCategoryByName(registration.getCategory())
+            .ifPresent(foundCategory -> {
+                    final Question question = this.questionMapper.toEntity(registration);
+                    question.setCategory(foundCategory);
+                    this.questionsRepository.save(question);
+            });
     }
 
     @Transactional
