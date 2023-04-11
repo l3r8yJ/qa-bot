@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 @Configuration
-public class AppConfiguration {
+public class RestTemplateConfiguration {
 
     @Value("${api.host.baseurl}")
     private String apiHost;
