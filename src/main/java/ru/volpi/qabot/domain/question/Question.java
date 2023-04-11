@@ -1,5 +1,6 @@
 package ru.volpi.qabot.domain.question;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;

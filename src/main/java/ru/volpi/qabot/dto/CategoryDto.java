@@ -9,7 +9,7 @@ import ru.volpi.qabot.dto.message.ValidationMessages;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Value
@@ -25,5 +25,5 @@ public class CategoryDto implements Serializable {
     @NotNull(message = ValidationMessages.CATEGORY_NAME_CANT_BE_EMPTY)
     String name;
 
-    List<QuestionDto> questions;
+    Set<QuestionDto> questions;
 }

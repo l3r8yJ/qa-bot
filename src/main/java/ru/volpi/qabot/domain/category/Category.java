@@ -7,9 +7,9 @@ import ru.volpi.qabot.domain.question.Question;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(schema = "categories_storage", name = "categories")
@@ -31,13 +31,13 @@ public class Category implements Serializable {
     @Column(name = "category_name")
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = {
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = {
         CascadeType.MERGE,
         CascadeType.REMOVE
     })
     @ToString.Exclude
     @Builder.Default
-    private List<Question> questions = new ArrayList<>(0);
+    private Set<Question> questions = new HashSet<>(0);
 
     @Override
     public boolean equals(final Object o) {

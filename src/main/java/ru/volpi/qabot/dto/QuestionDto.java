@@ -30,8 +30,4 @@ public class QuestionDto implements Serializable {
     @Size(min = 10, message = ValidationMessages.ANSWER_BOUND)
     @NotNull(message = ValidationMessages.QUESTION_ANSWER_CANT_BE_EMPTY)
     String answer;
-
-    @Valid
-    CategoryDto category;
-
 }

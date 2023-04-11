@@ -23,6 +23,6 @@ class CategoriesRepositoryTest extends TestcontainersTest {
     void findsCategoryByName() {
         final Optional<Category> actual = this.categoriesRepository.findCategoryByName("Тестовая категория");
         assertThat(actual).isPresent();
-        assertThat(actual.get().getQuestions().get(0).getText()).isEqualTo("Текст тестового вопроса");
+        assertThat(actual.get().getQuestions()).hasSize(1);
     }
 }
