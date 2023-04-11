@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.volpi.qabot.dto.message.ValidationMessages;
-import ru.volpi.qabot.dto.question.QuestionDto;
+import ru.volpi.qabot.dto.question.QuestionResponse;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -29,5 +29,5 @@ public class CategoryDto implements Serializable {
     private String name;
 
     @Builder.Default
-    private Set<QuestionDto> questions = new HashSet<>(0);
+    private Set<QuestionResponse> questions = new HashSet<>(0);
 }

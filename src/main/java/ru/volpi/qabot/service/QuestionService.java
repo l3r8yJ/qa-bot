@@ -1,9 +1,18 @@
 package ru.volpi.qabot.service;
 
 import ru.volpi.qabot.dto.question.QuestionDto;
-import ru.volpi.qabot.dto.question.QuestionRegistration;
+import ru.volpi.qabot.dto.question.QuestionResponse;
 
-public interface QuestionService extends CrudService<QuestionDto, Long> {
+import java.util.List;
 
-    void save(QuestionRegistration registration);
+public interface QuestionService {
+
+    void save(QuestionDto dto);
+
+    void update(Long id, QuestionDto dto);
+    List<QuestionResponse> findAll();
+    QuestionResponse findById(Long id);
+
+    void deleteById(Long id);
+
 }

@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.volpi.qabot.dto.category.CategoryDto;
+import ru.volpi.qabot.dto.question.QuestionDto;
 import ru.volpi.qabot.dto.question.QuestionRegistration;
+import ru.volpi.qabot.mapper.QuestionMapper;
 import ru.volpi.qabot.service.CategoriesService;
 import ru.volpi.qabot.service.QuestionService;
 
@@ -19,6 +21,8 @@ public class AdminPanelController {
     private final CategoriesService categoriesService;
 
     private final QuestionService questionService;
+
+    private final QuestionMapper questionMapper;
 
     @GetMapping
     public String index(final Model model) {
@@ -48,7 +52,10 @@ public class AdminPanelController {
 
     @PutMapping("questions")
     public final String createQuestion(@ModelAttribute("question") final QuestionRegistration registration) {
-        this.questionService.save(registration);
+        final CategoryDto category = this.categoriesService.findCategoryByName(registration.getCategory());
+        final QuestionDto question = this.questionMapper.toDto(registration);
+        question.setCategory(category);
+        this.questionService.save(question);
         return "redirect:/admin";
     }
 
