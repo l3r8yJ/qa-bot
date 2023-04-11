@@ -67,7 +67,7 @@ final class CategoriesRestControllerTest extends TestcontainersTest {
         this.mockMvc.perform(
             put(CATEGORIES)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{ \"name\": \"Test category \"}")
+                .content("{ \"name\": \"Test category\"}")
             ).andExpect(status().isConflict()).andDo(print());
     }
 

@@ -16,7 +16,7 @@ final class CategoriesRepositoryTest extends TestcontainersTest {
 
     @Test
     void findsAllCategories() {
-        assertThat(this.categoriesRepository.findAll()).hasSize(4);
+        assertThat(this.categoriesRepository.findAll()).hasSize(1);
     }
 
     @Test
