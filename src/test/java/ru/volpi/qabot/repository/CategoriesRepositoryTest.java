@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-class CategoriesRepositoryTest extends TestcontainersTest {
+final class CategoriesRepositoryTest extends TestcontainersTest {
 
     @Autowired
     private CategoriesRepository categoriesRepository;
@@ -21,7 +21,7 @@ class CategoriesRepositoryTest extends TestcontainersTest {
 
     @Test
     void findsCategoryByName() {
-        final Optional<Category> actual = this.categoriesRepository.findCategoryByName("Тестовая категория");
+        final Optional<Category> actual = this.categoriesRepository.findCategoryByName("Test category");
         assertThat(actual).isPresent();
         assertThat(actual.get().getQuestions()).hasSize(1);
     }
