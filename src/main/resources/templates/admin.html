@@ -19,11 +19,6 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <a th:href="@{/admin/new-category}">
-                    <button type="submit" class="btn btn-primary">Новая категория</button>
-                </a>
-            </tr>
             <tr th:each="category : ${categories}">
                 <td th:text="${category.id}"></td>
                 <td th:text="${category.name}"></td>
@@ -50,5 +45,13 @@
             </tr>
         </tbody>
     </table>
+    <div>
+        <a th:href="@{/admin/new-category}">
+            <button type="submit" class="btn btn-primary">Новая категория</button>
+        </a>
+        <a th:href="@{/admin/new-question}">
+            <button type="submit" class="btn btn-primary">Новый вопрос</button>
+        </a>
+    </div>
 </body>
 </html>
