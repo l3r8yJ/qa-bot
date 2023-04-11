@@ -11,8 +11,6 @@ import ru.volpi.qabot.mapper.QuestionMapper;
 import ru.volpi.qabot.service.CategoriesService;
 import ru.volpi.qabot.service.QuestionService;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
@@ -25,22 +23,36 @@ public class AdminPanelController {
     private final QuestionMapper questionMapper;
 
     @GetMapping
-    public String index(final Model model) {
+    public final String index(final Model model) {
         model.addAttribute("categories", this.categoriesService.findAll());
         return "admin";
     }
 
     @GetMapping("/new-category")
-    public String newCategory(final Model model) {
+    public final String createCategory(final Model model) {
         model.addAttribute("category", new CategoryDto());
         return "category/category";
     }
 
     @GetMapping("/new-question")
-    public String newQuestion(final Model model) {
-        final List<CategoryDto> categories = this.categoriesService.findAll();
+    public final String createQuestion(final Model model) {
         model.addAttribute("question", new QuestionRegistration());
-        model.addAttribute("categories", categories);
+        model.addAttribute("categories", this.categoriesService.findAll());
+        return "question/question";
+    }
+
+    @GetMapping("/update-category/{id}")
+    public final String updateCategory(@PathVariable final Long id, final Model model) {
+        model.addAttribute("category", this.categoriesService.findById(id));
+        model.addAttribute("categories", this.categoriesService.findAll());
+        return "category/category";
+    }
+
+    @GetMapping("/update-question/{id}")
+    public final String updateQuestion(@PathVariable final Long id, final Model model) {
+        model.addAttribute("question", new QuestionDto());
+        model.addAttribute("old_question", this.questionService.findById(id));
+        model.addAttribute("categories", this.categoriesService.findAll());
         return "question/question";
     }
 
@@ -51,7 +63,7 @@ public class AdminPanelController {
     }
 
     @PutMapping("questions")
-    public final String createQuestion(@ModelAttribute("question") final QuestionRegistration registration) {
+    public final String createQuestionProcessing(@ModelAttribute("question") final QuestionRegistration registration) {
         final CategoryDto category = this.categoriesService.findCategoryByName(registration.getCategory());
         final QuestionDto question = this.questionMapper.toDto(registration);
         question.setCategory(category);
@@ -60,8 +72,32 @@ public class AdminPanelController {
     }
 
     @DeleteMapping("/categories/{id}")
-    public final String deleteCategoryById(@PathVariable final Long id) {
+    public final String deleteCategoryByIdProcessing(@PathVariable final Long id) {
         this.categoriesService.deleteById(id);
+        return "redirect:/admin";
+    }
+
+    @DeleteMapping("/questions/{id}")
+    public final String deleteQuestionByIdProcessing(@PathVariable final Long id) {
+        this.questionService.deleteById(id);
+        return "redirect:/admin";
+    }
+
+    @PatchMapping("/categories/{id}")
+    public final String updateCategoryProcessing(
+        @PathVariable final Long id,
+        @ModelAttribute("category") final CategoryDto category
+    ) {
+        this.categoriesService.update(id, category);
+        return "redirect:/admin";
+    }
+
+    @PatchMapping("/questions/{id}")
+    public final String updateQuestionProcessing(
+        @PathVariable final Long id,
+        @ModelAttribute("question") final QuestionDto category
+    ) {
+        this.questionService.update(id, category);
         return "redirect:/admin";
     }
 }

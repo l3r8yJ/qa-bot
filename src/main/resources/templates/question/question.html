@@ -10,28 +10,55 @@
 </head>
 <body>
 <div class="container mt-3">
-    <h2>Новая Категория</h2>
+    <h2>Новый Вопрос</h2>
+    <br>
     <a href="/admin">Назад</a>
-    <div class="container mt-3">
-        <form action="#" th:action="@{/admin/questions}" th:object="${question}" th:method="put">
+    <div th:if="${categories.isEmpty()}">
+        <h3>Категории отсутствуют, создайте сначала категорию</h3>
+    </div>
+    <div th:unless="${categories.isEmpty()}" class="container mt-3">
+        <div th:if="${old_question == null}">
+            <form action="#" th:action="@{/admin/questions}" th:object="${question}" th:method="put">
                 <div class="mb-3 mt-3">
                     <label for="text" class="form-label">Текст вопроса</label>
-                    <input type="text" th:field="*{text}" class="form-control" id="text" placeholder="Текст вопроса">
+                    <input type="text" th:field="*{text}" th:value="${question.text}" class="form-control" id="text" placeholder="Текст вопроса">
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="answer" class="form-label">Текст ответа</label>
-                    <input type="text" th:field="*{answer}" class="form-control" id="answer" placeholder="Текст ответа">
+                    <input type="text" th:field="*{answer}" th:value="${question.answer}" class="form-control" id="answer" placeholder="Текст ответа">
                 </div>
                 <div class="mb-3">
                     <label for="select-category" class="form-label">Категория вопроса</label>
-                    <select class="form-control" id="select-category" th:field="*{category}">
-                        <option th:each="category : ${categories}" th:value="${category.name}">
+                    <select class="form-control" id="select-category" th:field="*{category}" th:value="${question.category}">
+                        <option th:each="category : ${categories}" th:value="${question.category}">
                             <p th:text="${category.name}"></p>
                         </option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Добавить вопрос</button>
-        </form>
+            </form>
+        </div>
+        <div th:unless="${old_question == null}">
+            <form action="#" th:action="@{/admin/questions/{id}(id=${old_question.id})}" th:object="${old_question}" th:method="patch">
+                <div class="mb-3 mt-3">
+                    <label for="text" class="form-label">Текст вопроса</label>
+                    <input type="text" th:field="*{text}" th:value="${old_question.text}" class="form-control" id="text" placeholder="Текст вопроса">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="answer" class="form-label">Текст ответа</label>
+                    <input type="text" th:field="*{answer}" th:value="${old_question.answer}" class="form-control" id="answer" placeholder="Текст ответа">
+                </div>
+                <div class="mb-3">
+                    <label for="select-category" class="form-label">Категория вопроса</label>
+                    <select class="form-control" id="select-category" th:field="*{category}" th:value="${old_question.category}">
+                        <option th:each="category : ${categories}" th:value="${old_question.category}">
+                            <p th:text="${category.name}"></p>
+                        </option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Обновить вопрос</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

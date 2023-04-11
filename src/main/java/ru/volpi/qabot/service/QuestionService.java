@@ -10,7 +10,9 @@ public interface QuestionService {
     void save(QuestionDto dto);
 
     void update(Long id, QuestionDto dto);
+
     List<QuestionResponse> findAll();
+
     QuestionResponse findById(Long id);
 
     void deleteById(Long id);

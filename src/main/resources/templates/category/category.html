@@ -12,13 +12,28 @@
 <div class="container mt-3">
   <h2>Новая Категория</h2>
   <a href="/admin">Назад</a>
-  <form action="#" th:action="@{/admin/categories}" th:object="${category}" th:method="put">
-    <div class="mb-3 mt-3">
-      <label for="name" class="form-label">Название категории</label>
-      <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Краткое название">
-      <button type="submit" class="btn btn-primary">Добавить категорию</button>
-    </div>
-  </form>
+  <div th:if="${old_category == null}">
+    <form action="#" th:action="@{/admin/categories}" th:object="${category}" th:method="put">
+      <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Название категории</label>
+        <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Краткое название">
+        <button type="submit" class="btn btn-primary">
+          Сохранить категорию
+        </button>
+      </div>
+    </form>
+  </div>
+  <div th:unless="${old_category == null}">
+    <form action="#" th:action="@{/admin/categories/{id}(id=${old_category.id})}" th:object="${old_category}" th:method="patch">
+      <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Название категории</label>
+        <input type="text" th:field="*{name}" th:value="${old_category.name}" class="form-control" id="name" placeholder="Краткое название">
+        <button type="submit" class="btn btn-primary">
+          Обновить категорию
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 </body>
 </html>

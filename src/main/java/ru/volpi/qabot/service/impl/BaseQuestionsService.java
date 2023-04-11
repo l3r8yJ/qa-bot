@@ -42,7 +42,7 @@ public class BaseQuestionsService implements QuestionService {
             }
         )
             .map(this.questionsRepository::saveAndFlush)
-            .map(this.questionMapper::toDto)
+            .map(this.questionMapper::toResponseDto)
             .orElseThrow(() -> new QuestionNotFoundException(id));
         BaseQuestionsService.log.debug(QUESTION_WAS_UPDATED_IN_SERVICE, updated);
     }
@@ -59,7 +59,7 @@ public class BaseQuestionsService implements QuestionService {
     public QuestionResponse findById(final Long id) {
         BaseQuestionsService.log.debug(FIND_BY_ID_CALL_IN_SERVICE, id);
         return this.questionsRepository.findById(id)
-            .map(this.questionMapper::toDto)
+            .map(this.questionMapper::toResponseDto)
             .orElseThrow(() -> new QuestionNotFoundException(id));
     }
 
@@ -69,7 +69,7 @@ public class BaseQuestionsService implements QuestionService {
         BaseQuestionsService.log.debug(FIND_ALL_IN_SERVICE);
         return this.questionsRepository.findAll()
             .stream()
-            .map(this.questionMapper::toDto)
+            .map(this.questionMapper::toResponseDto)
             .toList();
     }
 }

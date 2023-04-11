@@ -12,7 +12,9 @@ public interface QuestionMapper {
 
     Question toEntity(QuestionDto dto);
 
-    QuestionResponse toDto(Question question);
+    QuestionResponse toResponseDto(Question question);
+
+    QuestionDto toDto(Question question);
 
     @Mapping(target = "category", ignore = true)
     QuestionDto toDto(QuestionRegistration registration);
